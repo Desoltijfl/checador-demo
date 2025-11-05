@@ -1,0 +1,1 @@
+{"name":"checador-demo","version":"0.1.0","private":true,"scripts":{"start":"node index.js"},"dependencies":{"bcryptjs":"^2.4.3","express":"^4.18.2","jsonwebtoken":"^9.0.0","morgan":"^1.10.0"}}
