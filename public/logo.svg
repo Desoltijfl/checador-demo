@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+  <rect width="120" height="120" rx="20" fill="#0B3D91"/>
+  <path d="M35 70 L45 50 L55 70 L65 40 L75 70" stroke="#00A6C6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <text x="16" y="106" font-family="Inter, Arial" font-size="14" fill="white" font-weight="700">Checador</text>
+</svg>

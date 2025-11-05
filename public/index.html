@@ -2,67 +2,107 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Checador Demo</title>
+    <title>Checador — Demo</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <style>
-      body { font-family: Arial, sans-serif; padding: 20px; max-width: 900px; margin:auto; }
-      input { padding: 6px; width: 100%; box-sizing: border-box; }
-      button { padding: 8px 12px; margin-top: 8px; }
-      .row { display:flex; gap:10px; }
-      .card { border: 1px solid #ddd; padding: 12px; margin-top: 12px; border-radius:6px; }
-      table { width:100%; border-collapse: collapse; margin-top:8px; }
-      th, td { border:1px solid #eee; padding:6px; text-align:left; }
-    </style>
+    <!-- Tipografía -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <h1>Checador — Demo</h1>
-    <div id="notices">
-      <p>Puedes crear un usuario o usar <strong>/seed</strong> para generar demo@empresa.test (demo1234).</p>
-    </div>
-
-    <div id="auth">
-      <div class="card">
-        <h3>Registro</h3>
-        <input id="reg-name" placeholder="Nombre (opcional)" />
-        <input id="reg-email" placeholder="Email" />
-        <input id="reg-password" type="password" placeholder="Password" />
-        <button id="btn-register">Registrar</button>
-      </div>
-
-      <div class="card">
-        <h3>Login</h3>
-        <input id="login-email" placeholder="Email" />
-        <input id="login-password" type="password" placeholder="Password" />
-        <button id="btn-login">Login</button>
-        <p style="color:#666; margin-top:8px;">O usa <code>/seed</code> para crear demo rápido.</p>
-      </div>
-    </div>
-
-    <div id="app" style="display:none;">
-      <div class="card">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <div>
-            <strong id="user-info"></strong>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand">
+          <img src="/logo.svg" alt="Checador" class="logo" />
+          <div class="brand-text">
+            <span class="brand-title">Checador</span>
+            <span class="brand-sub">Asistencia • Simple • Segura</span>
           </div>
-          <div>
-            <button id="btn-logout">Logout</button>
+        </div>
+        <nav class="header-actions">
+          <button id="btn-seed" class="btn btn-ghost" title="Crear usuario demo">Crear demo</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="grid">
+        <aside class="card auth-card" id="auth">
+          <h3 class="card-title">Registro</h3>
+          <label class="field">
+            <input id="reg-name" class="input" placeholder="Nombre (opcional)" />
+          </label>
+          <label class="field">
+            <input id="reg-email" class="input" placeholder="Email" />
+          </label>
+          <label class="field">
+            <input id="reg-password" class="input" type="password" placeholder="Password" />
+          </label>
+          <div class="actions">
+            <button id="btn-register" class="btn btn-primary">Registrar</button>
+          </div>
+        </aside>
+
+        <section class="card auth-card">
+          <h3 class="card-title">Login</h3>
+          <label class="field">
+            <input id="login-email" class="input" placeholder="Email" />
+          </label>
+          <label class="field">
+            <input id="login-password" class="input" type="password" placeholder="Password" />
+          </label>
+          <div class="actions">
+            <button id="btn-login" class="btn btn-primary">Login</button>
+          </div>
+          <p class="muted">O usa <code>/seed</code> para crear demo rápido.</p>
+        </section>
+      </section>
+
+      <section id="app" class="hidden">
+        <div class="card top-card">
+          <div class="top-row">
+            <div class="user-info">
+              <div class="user-avatar" id="user-avatar">U</div>
+              <div>
+                <div id="user-info" class="user-name"></div>
+                <div class="muted user-email" id="user-email"></div>
+              </div>
+            </div>
+            <div class="top-actions">
+              <button id="btn-logout" class="btn btn-ghost">Logout</button>
+            </div>
+          </div>
+
+          <div class="check-actions">
+            <button id="btn-in" class="btn btn-accent">Registrar Entrada (IN)</button>
+            <button id="btn-out" class="btn btn-outline">Registrar Salida (OUT)</button>
+            <div id="last-action" class="last-action muted"></div>
           </div>
         </div>
 
-        <div style="margin-top:12px;">
-          <button id="btn-in">Registrar Entrada (IN)</button>
-          <button id="btn-out" style="margin-left:8px;">Registrar Salida (OUT)</button>
+        <div class="card">
+          <h3 class="card-title">Historial</h3>
+          <div id="history" class="history"></div>
         </div>
+      </section>
+    </main>
 
-        <div id="last-action" style="margin-top:12px; color:#333;"></div>
+    <footer class="site-footer">
+      <div class="container">
+        <span>© <span id="year"></span> Checador — Demo</span>
       </div>
-
-      <div class="card">
-        <h3>Historial</h3>
-        <div id="history"></div>
-      </div>
-    </div>
+    </footer>
 
     <script src="/app.js"></script>
+    <script>
+      // small enhancements for seed and footer
+      document.getElementById('year').textContent = new Date().getFullYear();
+      document.getElementById('btn-seed').addEventListener('click', async () => {
+        const res = await fetch('/seed');
+        const data = await res.json();
+        alert('Seed: ' + (data.password ? data.email + ' / ' + data.password : JSON.stringify(data)));
+      });
+      // expose some DOM ids used by the JS
+      // the rest of the behavior is in /app.js unchanged
+    </script>
   </body>
 </html>
