@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Checador Demo</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      body { font-family: Arial, sans-serif; padding: 20px; max-width: 900px; margin:auto; }
+      input { padding: 6px; width: 100%; box-sizing: border-box; }
+      button { padding: 8px 12px; margin-top: 8px; }
+      .row { display:flex; gap:10px; }
+      .card { border: 1px solid #ddd; padding: 12px; margin-top: 12px; border-radius:6px; }
+      table { width:100%; border-collapse: collapse; margin-top:8px; }
+      th, td { border:1px solid #eee; padding:6px; text-align:left; }
+    </style>
+  </head>
+  <body>
+    <h1>Checador — Demo</h1>
+    <div id="notices">
+      <p>Puedes crear un usuario o usar <strong>/seed</strong> para generar demo@empresa.test (demo1234).</p>
+    </div>
+
+    <div id="auth">
+      <div class="card">
+        <h3>Registro</h3>
+        <input id="reg-name" placeholder="Nombre (opcional)" />
+        <input id="reg-email" placeholder="Email" />
+        <input id="reg-password" type="password" placeholder="Password" />
+        <button id="btn-register">Registrar</button>
+      </div>
+
+      <div class="card">
+        <h3>Login</h3>
+        <input id="login-email" placeholder="Email" />
+        <input id="login-password" type="password" placeholder="Password" />
+        <button id="btn-login">Login</button>
+        <p style="color:#666; margin-top:8px;">O usa <code>/seed</code> para crear demo rápido.</p>
+      </div>
+    </div>
+
+    <div id="app" style="display:none;">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <strong id="user-info"></strong>
+          </div>
+          <div>
+            <button id="btn-logout">Logout</button>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;">
+          <button id="btn-in">Registrar Entrada (IN)</button>
+          <button id="btn-out" style="margin-left:8px;">Registrar Salida (OUT)</button>
+        </div>
+
+        <div id="last-action" style="margin-top:12px; color:#333;"></div>
+      </div>
+
+      <div class="card">
+        <h3>Historial</h3>
+        <div id="history"></div>
+      </div>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
